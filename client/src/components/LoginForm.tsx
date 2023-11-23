@@ -1,8 +1,10 @@
-import React,{useState} from 'react';
+import React,{useState,useContext} from 'react';
+import { Context } from '..';
 
 export const LoginForm =()=>{
     const [email,setEmail] = useState<string>('');
     const [password,setPassword] = useState<string>('');
+    const{store} = useContext(Context)
 
     return (
       <div>
@@ -22,8 +24,10 @@ export const LoginForm =()=>{
             setPassword(e.currentTarget.value);
           }}
         />
-        <button>Login</button>
-        <button>Registration</button>
+        <button 
+           onClick={()=>store.login(email,password)}>Login</button>
+        <button
+           onClick={()=>store.registration(email,password)}>Registration</button>
       </div>
     );
 }
