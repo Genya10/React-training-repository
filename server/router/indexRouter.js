@@ -1,13 +1,24 @@
 const Router = require("express").Router;
 const userController = require("../controllers/user-controller");
 const router = new Router();
-//const { body,validationResult } = require("express-validation");
-const { body,validationResult } = require("express-validator");
+const { body } = require("express-validator");
 const authMiddleware = require('../middlewares/auth-middleware');
 
-router.post(
-  "/registration",
-  [
+router.post("/registration",
+  body("email").isEmail(),
+  body("password").isLength({ min: 3, max: 32 }),
+  userController.registration);  
+router.post("/login", userController.login);
+router.post("/logout", userController.logout);
+router.get("/activate/:link", userController.activate);
+router.get("/refresh", userController.refresh);
+router.get("/users",authMiddleware ,userController.getUsers);
+
+module.exports = router;
+
+
+/*
+[
   body("email").isEmail(),
   body("password").isLength({ min: 3, max: 32 })],
   (req, res, next) => {
@@ -16,12 +27,4 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-  userController.registration(req, res, next)}
-);
-router.post("/login", userController.login);
-router.post("/logout", userController.logout);
-router.get("/activate/:link", userController.activate);
-router.get("/refresh", userController.refresh);
-router.get("/users",authMiddleware ,userController.getUsers);
-
-module.exports = router;
+  userController.registration(req, res, next)}*/
