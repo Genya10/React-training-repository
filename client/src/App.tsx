@@ -1,13 +1,57 @@
-import React from 'react';
+import React,{useContext,useEffect,useState} from 'react';
 import './App.css';
-import { LoginForm } from './components/LoginForm';
+import  LoginForm  from './components/LoginForm';
+import { Context } from './index';
+import { observer } from 'mobx-react-lite';
+import {IUser} from './models/IUser';
+import UserService from './services/UserService';
 
 function App() {
+  const {store} = useContext(Context);
+  const [users,setUsers] = useState<IUser[]>([])
+
+  useEffect(()=>{
+    if(localStorage.getItem('token')){
+      store.checkAuth()
+    }
+  },[]);
+
+  async function getUsers(){
+    try{
+     const response = await UserService.fetchUsers();
+     setUsers(response.data)
+    }catch(e){
+      console.log(e)
+    }
+  }
+
+  if(store.isLoading){
+    return <div>loading...</div>
+  }
+
+  if(!store.isAuth){
+    return (
+      <LoginForm />
+    )
+  }
+
   return (
     <div className="App">
-  <LoginForm/>
+      <h1>
+        {store.isAuth
+          ? `User auth: ${store.user.email}`
+          : "You need authorization"}
+      </h1>
+      <button onClick={() => store.logout()}>Logout</button>
+      <div>
+        <button onClick={getUsers}>Get users</button>
+        </div>
+        {users.map((user) => {
+          return <h3 key={user.email}>{user.email}</h3>;
+        })}
+      
     </div>
   );
 }
 
-export default App;
+export default observer(App) ;
