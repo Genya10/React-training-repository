@@ -71,6 +71,7 @@ class UserController {
     try {
       const users = await userService.getAllUsers();
       return res.json(users);
+      //res.json(['12','34','5678'])
     } catch (e) {
       next(e);
     }

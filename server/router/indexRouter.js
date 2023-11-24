@@ -16,15 +16,3 @@ router.get("/users",authMiddleware ,userController.getUsers);
 
 module.exports = router;
 
-
-/*
-[
-  body("email").isEmail(),
-  body("password").isLength({ min: 3, max: 32 })],
-  (req, res, next) => {
-   
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-  userController.registration(req, res, next)}*/
