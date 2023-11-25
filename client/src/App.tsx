@@ -31,7 +31,10 @@ function App() {
 
   if(!store.isAuth){
     return (
+      <div>
       <LoginForm />
+      <button onClick={getUsers}>Get users</button>
+      </div>
     )
   }
 
@@ -42,6 +45,7 @@ function App() {
           ? `User auth: ${store.user.email}`
           : "You need authorization"}
       </h1>
+      <h2>{store.user.isActivated ? 'Account confirmed' : 'You need confirm account!'}</h2>
       <button onClick={() => store.logout()}>Logout</button>
       <div>
         <button onClick={getUsers}>Get users</button>
