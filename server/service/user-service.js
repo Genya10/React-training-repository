@@ -11,7 +11,7 @@ class UserService {
     const candidate = await UserModel.findOne({ email });
     if (candidate) {
       throw ApiError.BadRequest(
-        `Пользователь с адресом ${email} уже существует`
+       `Пользователь с адресом ${email} уже существует`
       );
     }
     const hashPassword = await bcrypt.hash(password, 3);
@@ -32,6 +32,7 @@ class UserService {
 
     return { ...tokens, user: userDto };
   }
+
   async activate(activationLink) {
     const user = await UserModel.findOne({ activationLink });
     if (!user) {
@@ -60,14 +61,15 @@ class UserService {
     const token = await tokenService.removeToken(refreshToken);
     return token;
   }
+
   async refresh(refreshToken) {
     if (!refreshToken) {
-      throw ApiError.UnavthorizedError();
+      throw ApiError.UnauthorizedError();
     }
     const userData = tokenService.validateRefreshToken(refreshToken);
     const tokenFromDb = await tokenService.findToken(refreshToken);
     if (!userData || !tokenFromDb) {
-      throw ApiError.UnavthorizedError();
+      throw ApiError.UnauthorizedError();
     }
     const user = await UserModel.findById(userData.id);
     const userDto = new UserDto(user);
