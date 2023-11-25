@@ -1,6 +1,7 @@
 import React,{useState,useContext} from 'react';
 import { Context } from '..';
 import { observer } from 'mobx-react-lite';
+import cl from './LoginForm.module.css'
 
 const LoginForm = ()=>{
     const [email,setEmail] = useState<string>('');
@@ -8,8 +9,9 @@ const LoginForm = ()=>{
     const{store} = useContext(Context)
 
     return (
-      <div>
-        <input
+      <div className={cl.loginForm}>
+        <div className={cl.container}>
+        <input className={cl.input}
           type="text"
           placeholder="email"
           value={email}
@@ -25,10 +27,13 @@ const LoginForm = ()=>{
             setPassword(e.currentTarget.value);
           }}
         />
-        <button 
+        <div>
+        <button className={cl.btn}
            onClick={()=>store.login(email,password)}>Login</button>
-        <button
+        <button className={cl.btn}
            onClick={()=>store.registration(email,password)}>Registration</button>
+        </div>
+       </div>
       </div>
     );
 }
