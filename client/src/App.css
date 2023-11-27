@@ -1,23 +1,23 @@
-.App{
-    padding: 30px;
+.App {
+  padding: 30px;
 }
-.btn{
-    background-color: rgba(0, 0, 255);
-    color: white;
-    font-size: 20px;
-    padding: 5px 8px;
-    margin-bottom: 15px;
-    margin-left: 20px;
-    cursor: pointer;
-    border-radius: 12px;
-    border: none;
+.btn {
+  background-color: rgba(0, 0, 255);
+  color: white;
+  font-size: 20px;
+  padding: 5px 8px;
+  margin-bottom: 15px;
+  margin-left: 20px;
+  cursor: pointer;
+  border-radius: 12px;
+  border: none;
 }
-.title-2{
-    color: red;
+.title-2 {
+  color: red;
 }
-.list-gmail{
-padding: 10px;
-border: 1px dashed black;
-border-radius: 16px;
-width: 250px;
+.list-gmail {
+  padding: 10px;
+  border: 1px dashed black;
+  border-radius: 16px;
+  width: 250px;
 }

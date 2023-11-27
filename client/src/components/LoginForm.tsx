@@ -20,6 +20,7 @@ const LoginForm = ()=>{
           }}
         />
         <input
+          className={cl.input}
           type="password"
           placeholder="password"
           value={password}
