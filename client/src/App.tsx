@@ -40,18 +40,18 @@ function App() {
 
   return (
     <div className="App">
-      <h1>
+      <h1 className='title'>
         {store.isAuth
           ? `User auth: ${store.user.email}`
           : "You need authorization"}
       </h1>
-      <h2>{store.user.isActivated ? 'Account confirmed' : 'You need confirm account!'}</h2>
-      <button onClick={() => store.logout()}>Logout</button>
+      <h2 className='title-2'>{store.user.isActivated ? 'Account confirmed' : 'You need confirm account!'}</h2>
+      <button className='btn' onClick={() => store.logout()}>Logout</button>
       <div>
-        <button onClick={getUsers}>Get users</button>
+        <button className='btn' onClick={getUsers}>Get users</button>
         </div>
         {users.map((user) => {
-          return <h3 key={user.email}>{user.email}</h3>;
+          return <h3 className='list-gmail' key={user.email}>{user.email}</h3>;
         })}
       
     </div>
